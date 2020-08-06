@@ -1,9 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-import { LogoImage, MenuWrapper, ButtonLink } from './style.js';
+import { LogoImage, MenuWrapper } from './style.js';
 
-
+import Button from '../Button';
 
 export default function Menu() {
   return (
@@ -11,9 +11,9 @@ export default function Menu() {
       <Link to="/">
         <LogoImage />
       </Link>
-      <ButtonLink as={ Link } className="ButtonLink" to="/cadastro/video">
+      <Button as={ Link } className="ButtonLink" to="/cadastro/video">
         Novo Vídeo
-      </ButtonLink>
+      </Button>
     </MenuWrapper>
   )
 }
