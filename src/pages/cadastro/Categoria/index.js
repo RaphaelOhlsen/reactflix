@@ -4,30 +4,22 @@ import PageDefault from '../../../components/PageDefault';
 import FormField from '../../../components/FormField';
 import Button from '../../../components/Button';
 
-const CadastroCategoria = () => {
+import useForm from '../../../hooks/useForms';
+
+function CadastroCategoria() {
   const valoresIniciais = {
     nome: '',
     descricao: '',
     cor: '#000000',
   };
 
+  const { handleChange, values, clearForm } = useForm(valoresIniciais);
   const [categorias, setCategorias] = useState([]);
-
-  const [values, setValues] = useState(valoresIniciais);
 
   function handleSubmit(ev) {
     ev.preventDefault();
     setCategorias([...categorias, values]);
-    setValues(valoresIniciais);
-  }
-
-  function handleChange(ev) {
-    const key = ev.target.getAttribute('name');
-    const { value } = ev.target;
-    setValues({
-      ...values,
-      [key]: value,
-    });
+    clearForm();
   }
 
   useEffect(() => {
@@ -75,19 +67,21 @@ const CadastroCategoria = () => {
           value={values.cor}
           onChange={handleChange}
         />
-        <Button>Cadastrar</Button>
+        <Button type="submit">
+          Cadastrar
+        </Button>
       </form>
 
       {categorias.length === 0 && <div>Loading</div>}
 
       <ul>
         {categorias.map((categoria) => (
-          <li key={`${categoria.nome}`}>{categoria.nome}</li>
+          <li key={`${categoria.titulo}`}>{categoria.titulo}</li>
         ))}
       </ul>
 
       <Link to="/">Ir para home</Link>
     </PageDefault>
   );
-};
+}
 export default CadastroCategoria;
